@@ -1,0 +1,27 @@
+package controllers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.AbstractDao;
+import dao.GenericDao;
+
+import models.Cidade;
+
+
+public class Teste {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+			List<Cidade> cidades = Cidade.findAll();
+			GenericDao dao = new GenericDao();
+			cidades = dao.findAll(Cidade.class);
+			for(Cidade c :cidades)
+				System.out.println(c.getNome());
+				
+		
+	}
+
+}

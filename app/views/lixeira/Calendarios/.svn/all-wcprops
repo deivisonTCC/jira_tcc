@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/5/SISAD/app/views/Calendarios
+END
+cadastrarDadosCalendario.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/16/SISAD/app/views/Calendarios/cadastrarDadosCalendario.html
+END
+alterarDadosCalendario.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/16/SISAD/app/views/Calendarios/alterarDadosCalendario.html
+END
+editarEventoCalendario.html
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/16/SISAD/app/views/Calendarios/editarEventoCalendario.html
+END
+menuCalendario.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/16/SISAD/app/views/Calendarios/menuCalendario.html
+END
+cadastroEventoCalendario.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/16/SISAD/app/views/Calendarios/cadastroEventoCalendario.html
+END
+listarDadosCalendario.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/16/SISAD/app/views/Calendarios/listarDadosCalendario.html
+END

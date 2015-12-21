@@ -1,0 +1,29 @@
+#{extends 'include.html' /} 
+#{set title:'SISAD - Sistema de Secretaria da Assembléia de Deus' /}
+
+<head>
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<script type="text/javascript">
+	function voltar() {
+		window.open("@{Application.main}", "_top");
+	}
+</script>
+
+#{cabecalho/}
+<body>
+
+<table class="subFormulario" align="center" style="width: 30%">
+
+	<ul>
+		<li><a href="@{Calendarios.cadastroEventoCalendario}">Gerenciar Evento Calendario</a></li>
+		<li><a href="@{Calendarios.cadastrarDadosCalendario}">Gerenciar Dados Calendario</a></li>
+	</ul>
+	
+</table>
+
+</body>
+
+#{rodape/}

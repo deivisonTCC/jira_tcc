@@ -1,0 +1,82 @@
+package models;
+
+import java.util.Date;
+
+import play.db.jpa.Model;
+
+/**
+ * @author Deivison Guarines
+ *
+ */
+public class DadosCalendario  extends Model{
+	
+	private Long id;
+	private String denominacao;
+	private int diaInicio;
+	private int mesInicio;
+	private int anoInicio;
+	private int diaFim;
+	private int mesFim;
+	private int anoFim;
+	private Calendario calendario;
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getDenominacao() {
+		return denominacao;
+	}
+	public void setDenominacao(String denominacao) {
+		this.denominacao = denominacao;
+	}
+	public Calendario getCalendario() {
+		return calendario;
+	}
+	public void setCalendario(Calendario calendario) {
+		this.calendario = calendario;
+	}
+	public int getDiaInicio() {
+		return diaInicio;
+	}
+	public void setDiaInicio(int diaInicio) {
+		this.diaInicio = diaInicio;
+	}
+	public int getMesInicio() {
+		return mesInicio;
+	}
+	public void setMesInicio(int mesInicio) {
+		this.mesInicio = mesInicio;
+	}
+	public int getAnoInicio() {
+		return anoInicio;
+	}
+	public void setAnoInicio(int anoInicio) {
+		this.anoInicio = anoInicio;
+	}
+	public int getDiaFim() {
+		return diaFim;
+	}
+	public void setDiaFim(int diaFim) {
+		this.diaFim = diaFim;
+	}
+	public int getMesFim() {
+		return mesFim;
+	}
+	public void setMesFim(int mesFim) {
+		this.mesFim = mesFim;
+	}
+	public int getAnoFim() {
+		return anoFim;
+	}
+	public void setAnoFim(int anoFim) {
+		this.anoFim = anoFim;
+	}
+	
+	
+	
+
+}

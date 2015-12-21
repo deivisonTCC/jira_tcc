@@ -1,0 +1,65 @@
+#{extends 'include.html' /}
+#{set title:'SISAD' /}
+
+
+<script type="text/javascript">
+	
+	function voltar(){
+		window.open("@{Application.main}","_top");
+	}
+	
+	
+</script>
+
+<head></head>
+#{cabecalho/}
+<body>
+	
+	<form action="@{Usuarios.cadastrar()}" method="GET">
+	
+		<!-- &nbsp; -->
+		
+		<table class="formulario" align="center" style="width: 30%">
+		<caption>Cadastar Usuario</caption>
+			<tbody align="center">
+			
+				<tr>
+					<td>
+						E-mail :
+					</td>
+					<td align="left">
+						<input type="text" name="email" class="login-box-field" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Login :
+					</td>
+					<td align="left">
+						<input type="text" name="login" class="login-box-field"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Senha* :
+					</td>
+					<td align="left">
+						<input type="text" name="senha" class="login-box-field"/>
+					</td>
+				</tr>
+			</tbody>
+			
+			<tfoot align="center">
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="cadastrar"/>
+						<input type="button" value="Cancelar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+	</form>
+	
+</body>
+#{rodape/}

@@ -1,0 +1,133 @@
+package controllers;
+
+import play.*;
+import play.mvc.*;
+import play.mvc.Scope.Session;
+
+import java.util.*;
+
+import models.*;
+import play.cache.Cache;
+import play.db.*;
+import util.ValidatorUtil;
+
+import java.sql.*;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponseWrapper;
+
+public class Application extends Controller {
+
+	public static List<Usuarios> lista = new ArrayList<Usuarios>();
+
+	public static void index() throws SQLException {
+		List<Noticia> noticias = new ArrayList<Noticia>();
+		noticias = Noticias.buscarNoticias();
+		render(noticias);
+	}
+	
+	public static void main(){
+		render();
+	}
+	
+	/**
+	 * Método que já se explica pelo nome, toma essa equipe de requisitos!!!!. 
+	 * 
+	 * @author Deivison Guarines
+	 */
+	public static void login(String email, String senha) throws SQLException {
+		
+		if(email.equals("admin") && senha.equals("admin")){
+			flash.success("Olá %s seja bem vindo!", "Admin");
+			main();
+		}
+		
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		if(ValidatorUtil.isEmpty(email) && ValidatorUtil.isEmpty(senha)){
+			flash.error("Os campos estão em branco.");
+			index();
+		}
+		if(ValidatorUtil.isEmpty(email)){
+			flash.error("Campo Email esta em branco.");
+			index();
+		}
+		if(ValidatorUtil.isEmpty(senha)){
+			flash.error("Campo Senha esta em branco.");
+			index();
+		}
+
+		con = DB.getConnection();
+		
+		String sql = "SELECT * FROM usuario WHERE (email ='" + email + "' OR login ilike '" + email + "' ) "+ " AND senha ='" + senha + "'";
+
+		try {
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+
+			Usuario usuario = new Usuario();
+			
+			while (rs.next()) {
+				usuario.setId(rs.getLong("id"));
+				usuario.setLogin(rs.getString("login"));				
+				usuario.setEmail(rs.getString("email"));
+				usuario.setSenha(rs.getString("senha"));
+			}
+
+			if (!ValidatorUtil.isEmpty(usuario.getLogin())) {
+				session.put("usuario", usuario.getLogin().toString());
+				flash.success("Olá %s seja bem vindo!", usuario.getLogin());
+				main();
+			}else {
+				flash.error("Email ou Senha incorretos.");
+				index();
+			}
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+			flash.error("Ocorreu um erro inesperado:" + sqlex.toString());
+			index();
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+
+	}
+	
+	/**
+	 * Retorna a "pessoa" cujo login est� registrado na sess�o
+	 */
+	public static Usuario getLogin() {
+		String id = session.get("usuario");
+
+		if (id != null) {
+			Usuario usuario = Usuario.findById(Long.parseLong(id));
+			return usuario;
+		}
+		return null;
+	}
+	
+/*	*//**
+	 * Remove os dados da sess�o, efetuando o logout
+	 * @throws SQLException 
+	 *//*
+	public static void logout() throws SQLException {
+		session.remove("usuario");
+		index();
+	}*/
+	
+	 /**
+     * Verifica se o usuário esta logado
+     * @return
+     */
+    public static boolean isLogged()
+    {
+    	return Session.current().get("usuario")!=null;
+    }
+	
+}

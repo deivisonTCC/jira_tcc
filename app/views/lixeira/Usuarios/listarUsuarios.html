@@ -1,0 +1,86 @@
+#{extends 'include.html' /} 
+#{set title:'Listar Usuarios' /}
+
+<script type="text/javascript">
+	function voltar(){
+		window.open("@{Application.principal}","_top");
+	}
+</script>
+
+<head>
+
+</head>
+
+
+<body>
+
+	#{if usuarios.empty}
+		<div align="center">
+			<p style="color: red;"> Nenhum Usuario Cadastrado no sistema. </p>
+		</div>
+	#{/if}
+
+	#{if !usuarios.empty}
+	<table width="100%" align="center">
+		<caption class="legend1">
+			Listagem de Usuarios
+		</caption>
+		<thead>
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th width="1%" align="center"> 
+					Id
+				</th>
+				<th width="10%" align="center"> 
+					email
+				</th>
+				<th width="10%" align="center"> 
+					login
+				</th>
+				<th width="10%" align="center"> 
+					Senha
+				</th>
+				<th width="1%">
+				</th>
+				<th width="1%">
+				</th>
+			</tr>
+			
+			#{list items: usuarios, as:'usuario'}
+				<tr>
+					<td align="center">
+						${usuario.id}
+					</td>
+	
+					<td align="center">
+						${usuario.email}
+					</td>
+										
+					<td align="center">
+						${usuario.login}
+					</td>
+					<td align="center">
+						${usuario.senha}
+					</td>
+					<td align="center">
+						<a href="@{Usuarios.editarUsuario(usuario)}">
+							<img alt="Alterar Usuario"  src="/public/images/utilCRUD/edita.JPG" width="25px" height="25px" >	
+						</a>
+					</td>
+					<td align="center">
+						<a href="@{Usuarios.excluirUsuario(usuario)}">
+							<img alt="Remover Usuario" src="/public/images/utilCRUD/remove.jpg"  width="25px" height="25px" onclick="return confirm('Confirma?')">
+						</a>
+					</td>
+				</tr>
+			#{/list}
+		</thead>
+	</table>
+	#{/if}
+	
+	</br>
+	
+	<div style="width: 100%" align="center" >
+		<input type="button" value="Voltar" onclick="voltar()"/>
+	</div>
+	
+</body>

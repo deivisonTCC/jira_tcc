@@ -1,0 +1,52 @@
+package models;
+
+import java.util.*;
+
+import play.db.jpa.Model;
+
+/**
+ * @author Deivison Guarines
+ *
+ */
+public class Calendario extends Model {
+	
+	private Long id;
+	private String nomeEvento;
+	private int periodo;
+	private int ano;
+	private DadosCalendario dadosCalendario;
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNomeEventoPeriodo() {
+		return nomeEvento;
+	}
+	public void setNomeEvento(String nomeEvento) {
+		this.nomeEvento = nomeEvento;
+	}
+	public int getPeriodo() {
+		return periodo;
+	}
+	public void setPeriodo(int periodo) {
+		this.periodo = periodo;
+	}
+	public DadosCalendario getDadosCalendario() {
+		return dadosCalendario;
+	}
+	public void setDadosCalendario(DadosCalendario dadosCalendario) {
+		this.dadosCalendario = dadosCalendario;
+	}
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+	
+
+}

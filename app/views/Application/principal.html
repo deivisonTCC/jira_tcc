@@ -1,0 +1,53 @@
+#{extends 'main.html' /} 
+#{set title:'Principal' /}
+
+<script type="text/javascript">
+	function buscarUsuario() {
+		window.open("@{Usuarios.buscarUsuario}", "_top");
+	}
+	
+	function listarUsuarios() {
+		window.open("@{Usuarios.listarUsuarios}", "_top");
+	}
+	function sair() {
+		window.open("@{Application.main}", "_top");
+	}
+	function cadastrar() {
+		window.open("@{Usuarios.cadastroUsuario}", "_top");
+	}
+</script>
+<head>
+
+</head>
+
+
+<body>
+	<div style="border: solid; width: 20%" align="center">
+		<table> 
+			<tr>
+				<th> Principal </th>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="Cadastrar Usuario" onclick="cadastrar()">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="Buscar Usuario" onclick="buscarUsuario()">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="button" value="Listar Usuarios" onclick="listarUsuarios()"/>
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<input type="button" value="Voltar" onclick="sair()"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</body>

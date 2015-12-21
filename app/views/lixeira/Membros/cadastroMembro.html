@@ -1,0 +1,75 @@
+#{extends 'include.html' /} 
+#{set title:'Buscar Membro' /}
+
+<script type="text/javascript">
+	
+	function voltar(){
+		window.open("@{Application.main}","_top");
+	}	
+</script>
+
+<head></head>
+#{cabecalho/}
+<body>
+	
+	<form action="@{Membros.cadastroMembro()}" method="GET">
+	
+		<!-- &nbsp; -->
+		
+		<table class="formulario" align="center" style="width: 60%">
+		<caption>Cadastar Membro</caption>
+			<tbody align="center">
+			
+				<tr>
+					<td align="right">
+						Cidade*:
+					</td>
+					<td align="left">
+						<input type="text" style="width: 80%" name="cidade" class="login-box-field" value="Natal/RN"/>
+					</td>
+				
+					<td align="right">
+						Setor*:
+					</td>
+					<td align="left">
+						<select>
+							 <option value="1" label="12">
+						</select>
+					</td>
+				
+					<td align="right">
+						Congregação*:
+					</td>
+					<td align="left">
+						
+						<select>
+							 <option value="1" label="Amarante I">
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Senha* :
+					</td>
+					<td  colspan="5" align="left">
+						<input type="text" name="senha" class="login-box-field"/>
+					</td>
+				</tr>
+				
+			</tbody>
+			
+			<tfoot align="center">
+			
+				<tr>
+					<td colspan="6">
+						<input type="submit" value="cadastrar"/>
+						<input type="button" value="Cancelar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+	</form>
+	
+</body>
+#{rodape/}

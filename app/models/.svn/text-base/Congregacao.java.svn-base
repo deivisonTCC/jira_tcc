@@ -1,0 +1,82 @@
+/**
+ * 
+ */
+package models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import play.db.jpa.Model;
+
+/**
+ * @author Joab
+ *
+ */
+@Entity
+public class Congregacao extends Model{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private String nome;
+	
+	private Integer setor;
+
+	private Endereco endereco;
+	
+	private Congregacao congregacaoPolo;
+	
+	private boolean polo;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Integer getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Integer setor) {
+		this.setor = setor;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public Congregacao getCongregacaoPolo() {
+		return congregacaoPolo;
+	}
+
+	public void setCongregacaoPolo(Congregacao congregacaoPolo) {
+		this.congregacaoPolo = congregacaoPolo;
+	}
+
+	public boolean isPolo() {
+		return polo;
+	}
+
+	public void setPolo(boolean polo) {
+		this.polo = polo;
+	}
+	
+}

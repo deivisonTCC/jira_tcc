@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/logo-icone.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        #{get 'moreScripts' /}
+    </head>
+    <body>
+
+    	
+    	<div>
+       		#{doLayout /}
+       	</div>
+       	
+       	<!-- <div align="center">
+			</br>
+			<div>
+				#{if flash.error}
+					<div >
+						<a style="color: red;"> ${flash.error} </a>
+					</div>
+				#{/if} #{if flash.success}
+					<div>
+						 <a style="color: green;"> ${flash.success} </a>
+					</div>
+				#{/if}
+			</div>
+			</br>
+		</div> -->
+
+	      <!-- #{if session.usuario}
+	      	</br>
+	      	</br>
+		  	<div id="menu-wrapper">
+				<div id="menu" class="container">
+				</div>
+			</div>
+		  #{/if} -->
+		
+        
+    </body>
+</html>

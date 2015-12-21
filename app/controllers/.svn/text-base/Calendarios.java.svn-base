@@ -1,0 +1,598 @@
+package controllers;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import models.Calendario;
+import models.DadosCalendario;
+import models.Usuario;
+import play.db.DB;
+import play.mvc.Controller;
+import util.ValidatorUtil;
+
+/**
+ * @author Deivison Guarines
+ *
+ */
+public class Calendarios extends Controller {
+	
+	public static void index() {
+		render();
+	}
+	
+	public static void menuCalendario(){
+		render();
+	}
+	
+	public static void cadastroEventoCalendario() throws SQLException{
+		
+		List<Calendario> calendarios = buscarTodosCalendarios();
+		
+		render(calendarios);
+	}
+	
+	public static void cadastroEvento(String nomeEvento, int ano, int periodo) throws SQLException{
+		
+		if(ValidatorUtil.isEmpty(nomeEvento) && ValidatorUtil.isEmpty(ano)){
+			flash.error("Campos obrigatórios não preenchidos.");
+			cadastroEventoCalendario();
+		}
+		if(ValidatorUtil.isEmpty(nomeEvento)){
+			flash.error("Nome Evento: O campo esta em branco.");
+			cadastroEventoCalendario();
+		}
+		if(ValidatorUtil.isEmpty(ano)){
+			flash.error("Ano: O campo esta em branco.");
+			cadastroEventoCalendario();
+		}
+		
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "INSERT INTO calendario (nome_evento, periodo, ano) VALUES (" 
+				 + "'" + nomeEvento.toUpperCase() + "'" + "," 
+				 + "'" + periodo + "'" + ","
+				 + "'" + ano + "' )"; 
+		
+		try {
+			s = con.createStatement();
+			rs = s.execute(sql); // execute usado para insert
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs == true)
+				; // não faz nada, apenas para remover warning
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		flash.success("Evento cadastrado com sucesso.");
+		
+		cadastroEventoCalendario();
+	}
+	
+	public static List<Calendario> buscarTodosCalendarios() throws SQLException{
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		List<Calendario> calendarios = new ArrayList<Calendario>();
+		con = DB.getConnection();
+		String sql = "SELECT id, nome_evento, periodo, ano FROM calendario WHERE 1=1 ORDER BY periodo DESC ;";
+		try {
+				s = con.createStatement();
+				rs = s.executeQuery(sql);
+				while (rs.next()) {
+					Calendario calendario = new Calendario();
+					calendario.setId(rs.getLong("id"));
+					calendario.setNomeEvento(rs.getString("nome_evento"));
+					calendario.setPeriodo(rs.getInt("periodo"));
+					calendario.setAno(rs.getInt("ano"));
+					calendarios.add(calendario);
+				}
+			
+		 	}catch (SQLException sqlex){
+				sqlex.printStackTrace();
+			} finally {
+				if (rs != null)
+					rs.close(); 
+				if (s != null)
+					s.close();
+				if (con != null)
+					con.close();
+			}
+		
+		return calendarios;
+	}
+	
+	
+	public static void cadastrarDadosCalendario() throws SQLException{
+		List<Calendario> calendarios = buscarTodosCalendarios();
+		List<DadosCalendario> listaDados = new ArrayList<DadosCalendario>();
+		
+		render(calendarios, listaDados);
+	}
+	
+	
+	public static void cadastrarDados(int idCalendario, String denominacao, int diaInicio,int mesInicio, int anoInicio, int diaFinal, int mesFinal, int anoFinal ) throws SQLException{
+		
+		/*Gambiarra totaaaaaaaallllll wwoooowww*/
+		if(ValidatorUtil.isEmpty(idCalendario) && ValidatorUtil.isEmpty(denominacao) ||
+		   ValidatorUtil.isEmpty(idCalendario) && ValidatorUtil.isEmpty(diaInicio) ||
+		   ValidatorUtil.isEmpty(idCalendario) && ValidatorUtil.isEmpty(diaFinal)||
+		   ValidatorUtil.isEmpty(denominacao) && ValidatorUtil.isEmpty(diaInicio) ||
+		   ValidatorUtil.isEmpty(denominacao) && ValidatorUtil.isEmpty(diaFinal) ||
+		   ValidatorUtil.isEmpty(diaInicio) && ValidatorUtil.isEmpty(diaFinal)){
+			flash.error("Campos obrigatórios devem ser preenchidos.");
+			cadastrarDadosCalendario();
+		}
+		if(ValidatorUtil.isEmpty(idCalendario)){
+			flash.error("Selecione um dos Calendários listados.");
+			cadastrarDadosCalendario();
+		}
+		if(ValidatorUtil.isEmpty(denominacao)){
+			flash.error("Denominação: Campo obrigatório deve ser preenchido.");
+			cadastrarDadosCalendario();
+		}
+		if(ValidatorUtil.isEmpty(diaInicio)){
+			flash.error("Período Inicial: Campo obrigatório deve ser preenchido.");
+			cadastrarDadosCalendario();
+		}
+		if(ValidatorUtil.isEmpty(diaFinal)){
+			flash.error("Período Final: Campo obrigatório deve ser preenchido.");
+			cadastrarDadosCalendario();
+		}
+		
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		/*java.sql.Date dataInicio = new java.sql.Date(anoInicio - 1900, mesInicio - 1, diaInicio);
+		java.sql.Date dataFinal = new java.sql.Date(anoFinal - 1900, mesFinal - 1, diaFinal);*/
+		
+		String sql = "INSERT INTO dados_calendario (id_calendario, denominacao, dia_inicio, mes_inicio, ano_inicio, dia_fim, mes_fim, ano_fim) VALUES ("
+				+ "'" + idCalendario + "'" + ","
+				+ "'" + denominacao.toUpperCase().trim() + "'" + ","
+				+ "'" + diaInicio + "'" + ","
+				+ "'" + mesInicio + "'" + ","
+				+ "'" + anoInicio + "'" + ","
+				+ "'" + diaFinal + "'" + ","
+				+ "'" + mesFinal + "'" + ","
+				+ "'" + anoFinal + "'" + ")"; 
+		
+		try {
+			s = con.createStatement();
+			rs = s.execute(sql); // execute usado para insert
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs == true)
+				; // não faz nada, apenas para remover warning
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		flash.success("Dados cadastrado com sucesso.");
+		cadastrarDadosCalendario();
+		
+	}
+	
+	public static void listarDadosCalendario(int idCalendario) throws SQLException{
+		
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		List<String> meses = new ArrayList<String>();
+		
+		meses.add("Janeiro");
+		meses.add("Fevereiro");
+		meses.add("Março");
+		meses.add("Abril");
+		meses.add("Maio");
+		meses.add("Junho");
+		meses.add("Julho");
+		meses.add("Agosto");
+		meses.add("Setembro");
+		meses.add("Outubro");
+		meses.add("Novembro");
+		meses.add("Dezembro");
+		
+		List<DadosCalendario> listaDados = new ArrayList<DadosCalendario>();
+		con = DB.getConnection();
+		String sql = "SELECT d.id, d.denominacao, d.id_calendario, d.dia_inicio, d.mes_inicio, d.ano_inicio, d.dia_fim,"
+				+ " d.mes_fim, d.ano_fim, c.nome_evento, c.periodo, c.ano FROM dados_calendario as d INNER JOIN calendario c "
+				+ "ON (d.id_calendario = c.id) WHERE d.id_calendario = " + idCalendario + " "
+				+ "ORDER BY d.mes_inicio, d.dia_inicio  ASC ;";
+		
+		String nomeEvento = "";
+		int periodo = 0;
+		int ano = 0;
+		
+		try {
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				DadosCalendario dados = new DadosCalendario();
+				Calendario calendario = new Calendario();
+				
+				dados.setId(rs.getLong("id"));
+				dados.setDenominacao(rs.getString("denominacao"));
+				
+				calendario.setId(rs.getLong("id_calendario"));
+				
+				dados.setDiaInicio(rs.getInt("dia_inicio"));
+				dados.setMesInicio(rs.getInt("mes_inicio"));
+				dados.setAnoInicio(rs.getInt("ano_inicio"));
+				
+				dados.setDiaFim(rs.getInt("dia_fim"));
+				dados.setMesFim(rs.getInt("mes_fim"));
+				dados.setAnoFim(rs.getInt("ano_fim"));
+				
+				calendario.setNomeEvento(rs.getString("nome_evento"));
+				nomeEvento = calendario.getNomeEventoPeriodo();
+				
+				calendario.setPeriodo(rs.getInt("periodo"));
+				periodo = calendario.getPeriodo();
+				
+				calendario.setAno(rs.getInt("ano"));
+				ano = calendario.getAno();
+				
+				dados.setCalendario(calendario);
+				
+				listaDados.add(dados);
+			}
+			
+			
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs != null)
+				rs.close(); // usado quando o rs for do tipo ResultSet
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		render(listaDados,meses,nomeEvento,periodo,ano);
+	}
+	
+	public static void removeEventoCalendario(int idCalendario) throws SQLException{
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql1 = "DELETE FROM dados_calendario AS d WHERE d.id_calendario = " + idCalendario + " ;";
+		String sql2 = "DELETE FROM calendario WHERE calendario.id = " + idCalendario + " ;";
+		
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.execute(sql1); 
+			rs = s.execute(sql2);
+			
+			flash.success("Evento Calendario excluido com sucesso.");
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs == true)
+				;
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		cadastroEventoCalendario();
+	}
+	
+	
+	public static void editarEventoCalendario(int idCalendario) throws SQLException{
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		Calendario calendario = new Calendario();
+		con = DB.getConnection();
+		String sql = "SELECT * FROM calendario WHERE calendario.id = " + idCalendario + " ;";
+		
+		try {
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+			while (rs.next()) {
+				calendario.setId(rs.getLong("id"));
+				calendario.setNomeEvento(rs.getString("nome_evento"));
+				calendario.setPeriodo(rs.getInt("periodo"));
+				calendario.setAno(rs.getInt("ano"));
+			}
+		
+	 	}catch (SQLException sqlex){
+			sqlex.printStackTrace();
+		} finally {
+			if (rs != null)
+				rs.close(); // usado quando o rs for do tipo ResultSet
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+			
+		render(calendario);
+	}
+	
+	
+	public static void alteraEventoCalendario(String nomeEvento, int ano, int periodo , int id) throws SQLException{
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "UPDATE calendario SET "
+				+ "nome_evento= '" + nomeEvento.toUpperCase() + "' , "
+				+ "ano= " + ano + " , "
+				+ "periodo= " + periodo
+				+ " WHERE id = " + id + " ;";
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.execute(sql); 
+			
+			flash.success("Evento Calendário alterado com sucesso.");
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		}finally {
+			if (rs == true)
+				;
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		cadastroEventoCalendario();
+		
+	}
+	
+	public static void listaDadosCalendario(int idCalendario) throws SQLException{
+		
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		List<String> meses = new ArrayList<String>();
+		
+		meses.add("Janeiro");
+		meses.add("Fevereiro");
+		meses.add("Março");
+		meses.add("Abril");
+		meses.add("Maio");
+		meses.add("Junho");
+		meses.add("Julho");
+		meses.add("Agosto");
+		meses.add("Setembro");
+		meses.add("Outubro");
+		meses.add("Novembro");
+		meses.add("Dezembro");
+		
+		List<DadosCalendario> listaDados = new ArrayList<DadosCalendario>();
+		con = DB.getConnection();
+		String sql = "SELECT d.id, d.denominacao, d.id_calendario, d.dia_inicio, d.mes_inicio, d.ano_inicio, d.dia_fim,"
+				+ " d.mes_fim, d.ano_fim, c.nome_evento, c.periodo, c.ano FROM dados_calendario as d INNER JOIN calendario c "
+				+ "ON (d.id_calendario = c.id) WHERE d.id_calendario = " + idCalendario + " "
+				+ "ORDER BY d.mes_inicio, d.dia_inicio  ASC ;";
+		
+		String nomeEvento = "";
+		int periodo = 0;
+		int ano = 0;
+		
+		try {
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				DadosCalendario dados = new DadosCalendario();
+				Calendario calendario = new Calendario();
+				
+				dados.setId(rs.getLong("id"));
+				dados.setDenominacao(rs.getString("denominacao"));
+				
+				calendario.setId(rs.getLong("id_calendario"));
+				
+				dados.setDiaInicio(rs.getInt("dia_inicio"));
+				dados.setMesInicio(rs.getInt("mes_inicio"));
+				dados.setAnoInicio(rs.getInt("ano_inicio"));
+				
+				dados.setDiaFim(rs.getInt("dia_fim"));
+				dados.setMesFim(rs.getInt("mes_fim"));
+				dados.setAnoFim(rs.getInt("ano_fim"));
+				
+				calendario.setNomeEvento(rs.getString("nome_evento"));
+				nomeEvento = calendario.getNomeEventoPeriodo();
+				
+				calendario.setPeriodo(rs.getInt("periodo"));
+				periodo = calendario.getPeriodo();
+				
+				calendario.setAno(rs.getInt("ano"));
+				ano = calendario.getAno();
+				
+				dados.setCalendario(calendario);
+				
+				listaDados.add(dados);
+			}
+			
+			
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs != null)
+				rs.close(); // usado quando o rs for do tipo ResultSet
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		session.put("id_calendario", idCalendario);
+		
+		render(listaDados,meses,nomeEvento,periodo,ano);
+	}
+
+	public static void alterarDadosCalendario(int idDado) throws SQLException{
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "SELECT * FROM dados_calendario WHERE id = " + idDado + " ;";
+		DadosCalendario dado = new DadosCalendario();
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+			
+			while(rs.next()){
+				dado.setId(rs.getLong("id"));
+				dado.setDenominacao(rs.getString("denominacao"));
+				dado.setDiaInicio(rs.getInt("dia_inicio"));
+				dado.setMesInicio(rs.getInt("mes_inicio"));
+				dado.setAnoInicio(rs.getInt("ano_inicio"));
+				dado.setDiaFim(rs.getInt("dia_fim"));
+				dado.setMesFim(rs.getInt("mes_fim"));
+				dado.setAnoFim(rs.getInt("ano_fim"));
+				
+				Calendario calendario = new Calendario();
+				calendario.setId(rs.getLong("id_calendario"));
+				
+				dado.setCalendario(calendario);
+
+			}
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs != null)
+				rs.close(); // usado quando o rs for do tipo ResultSet
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		render(dado);
+	}
+	
+	public static void editaDadosCalendario(int id, String denominacao, int diaInicio, int mesInicio, int anoInicio, int diaFim, int mesFim, int anoFim, int idCalendario) throws SQLException{
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "UPDATE dados_calendario SET "
+				+ " denominacao= " + " '" + denominacao.toUpperCase() + "'" + ","
+				+ " dia_inicio= " + " '" + diaInicio + "'" + " , "
+				+ " mes_inicio= " + " '" + mesInicio + "'" + " , "
+				+ " ano_inicio= " + " '" + anoInicio + "'" + " , "
+				+ " dia_fim= " + " '" + diaFim + "'" + " , "
+				+ " mes_fim= " + " '" + mesFim + "'" + " , "
+				+ " ano_fim= " + " '" + anoFim + "'" + " "
+				+ " WHERE id = " + id + ";";
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.execute(sql); 
+			
+			flash.success("Dados do calendário alterados com sucesso.");
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		}finally {
+			if (rs == true)
+				;
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		listarDadosCalendario(idCalendario);
+		
+	}
+	
+	
+	public static void removeDadosCalendario(int idDado, int idCalendario) throws SQLException{
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		
+		con = DB.getConnection();
+
+		String sql = "DELETE FROM dados_calendario WHERE dados_calendario.id = " + idDado + " ;";
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.execute(sql); 
+			
+			flash.success("Dado Calendario excluido com sucesso.");
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs == true)
+				;
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		
+		
+		listarDadosCalendario(idCalendario);
+		
+	}
+	
+	public static int safeLongToInt(long l) {
+	    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
+	        throw new IllegalArgumentException
+	            (l + " cannot be cast to int without changing its value.");
+	    }
+	    return (int) l;
+	}
+	
+
+}

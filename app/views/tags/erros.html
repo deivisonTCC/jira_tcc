@@ -1,0 +1,26 @@
+
+<head>
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<div align="center">
+	<table style="background-color:#CCECFE;width: 60%;" >
+		<tr>
+			<td align="center">
+				#{if flash.error}
+					<div >
+						<a style="color: red;"> ${flash.error} </a>
+					</div>
+				#{/if} #{if flash.success}
+					<div>
+						 <a style="color: green;"> ${flash.success} </a>
+					</div>
+				#{/if}
+			</td>
+		</tr>
+	</table>
+</div>
+
+
+

@@ -1,0 +1,123 @@
+#{extends 'include.html' /} 
+#{set title:'Filtrar Tasks de Bugs' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich">
+
+<body>
+
+	<form id="form" action="@{BuscarTaskBugSprint.filtarTaskBugSprint}" method="get" >
+		<div style="width: 100%" align="center">
+			<div style="width: 30%" align="center">
+				<table class="table table-bordered" align="center" width="100%">
+					<caption> Buscar por Tarefas </caption>
+					<thead>
+						<tr>
+							<td>
+								<input id="checkResponsavel" type="checkbox" name="checkResponsavel"/>
+							</td>
+							<td>
+								Responsável:
+							</td>
+							<td align="left">
+								<input type="text" name="responsavel" class="form-control" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input id="checkSprint" type="checkbox" name="checkSprint"/>
+							</td>
+							<td>
+								Sprint:
+							</td>
+							<td align="left">
+								<select name="sprint">
+									<option value="0" > --Selecione-- </option>
+									#{list items: sprints, as:'sprint'}
+										<option value="${sprint.id}">${sprint.name}</option>
+									#{/list}
+								</select>
+							</td>
+						</tr>
+					</thead>
+					<tfoot align="center">
+						<tr>
+							<td colspan="3">
+								<input type="submit" value="Buscar"/>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</form>
+	
+	#{if tarefas.empty}
+		<div align="center">
+			<p style="color: red;"> Nenhuma Tarefa relacionada no sistema. </p>
+		</div>
+	#{/if}
+	
+	#{if !tarefas.empty}
+		<table class="table table-striped table-bordered">
+			<tr>
+				<th width="1%" align="center"> 
+					Id
+				</th>
+				<th width="1%" align="center"> 
+					Projeto 
+				</th>
+				<th width="1%" align="center"> 
+					Aberta Por
+				</th>
+				<th width="1%" align="center"> 
+					Responsável 
+				</th>
+				<th width="1%" align="center"> 
+					Situação 
+				</th>
+				<th width="1%" align="center"> 
+					Prioridade 
+				</th>
+				<th width="1%" align="center"> 
+					Tipo 
+				</th>
+			</tr>
+			
+			#{list items: tarefas, as:'tarefa'}
+				<tr>
+					<td align="center">
+						${tarefa.id}
+					</td>
+					
+					<td align="center">
+						${tarefa.environment}
+					</td>
+					
+					<td align="center">
+						${tarefa.creator}
+					</td>
+					
+					<td align="center">
+						${tarefa.assignee}
+					</td>
+					
+					<td align="center">
+						${tarefa.issuestatus}
+					</td>
+					
+					<td align="center">
+						${tarefa.priority}
+					</td>
+					
+					<td align="center">
+						${tarefa.issuetype}
+					</td>
+				</tr>
+			#{/list}
+		</table>
+	#{/if}
+
+</body>
+
+</html>

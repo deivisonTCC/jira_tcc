@@ -1,0 +1,71 @@
+#{extends 'include.html' /}
+#{set title:'Edtar Usuário' /}
+
+
+<script type="text/javascript">
+	
+	function voltar(){
+		window.open("@{Usuarios.buscarUsuario}","_top");
+	}
+		
+	
+</script>
+
+#{cabecalho/}
+<body>
+	
+	<form action="@{Usuarios.editar()}" method="GET">
+	
+		<!-- &nbsp; -->
+		
+		<table class="subFormulario" align="center" style="width: 30%">
+			<tbody align="center">
+				
+				<tr>
+					<th colspan="3">
+						Alterar Usuario
+					</th>
+				</tr>
+				<tr>
+					<td>
+						E-mail :
+					</td>
+					<td align="left">
+						<input type="hidden" name="idUsuario" value="${usuario?.id}"/>
+						<input type="text" name="email" value="${usuario?.email}" class="login-box-field" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Login :
+					</td>
+					<td align="left">
+						<input type="text" name="login" value="${usuario?.login}" class="login-box-field"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Senha* :
+					</td>
+					<td align="left">
+						<input type="password" name="senha" value="${usuario?.senha}" class="login-box-field"/>
+					</td>
+				</tr>
+				
+			</tbody>
+			
+			<tfoot align="center">
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="Editar"/>
+						<input type="button" value="Voltar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+	</form>
+	
+</body>
+
+#{rodape/}

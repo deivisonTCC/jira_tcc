@@ -1,0 +1,59 @@
+/**
+ * 
+ */
+package models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import play.db.jpa.Model;
+
+/**
+ * @author Joab
+ *
+ */
+@Entity
+public class NivelFormacao extends Model{
+
+	public static int INCOMPLETO = 1;
+	
+	public static int CURSANDO = 2;
+	
+	public static int COMPLETO = 3;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	private String descricao;
+	
+	/**define qual a situação escolar atual do usuario.*/
+	private Integer situacao;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Integer getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Integer situacao) {
+		this.situacao = situacao;
+	}
+	
+}

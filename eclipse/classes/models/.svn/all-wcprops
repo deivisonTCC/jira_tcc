@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/12/SISAD/app/models
+END
+DadosCalendario.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/5/SISAD/app/models/DadosCalendario.java
+END
+Usuario.java
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/14/SISAD/app/models/Usuario.java
+END
+EstadoCivil.java
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/2/SISAD/app/models/EstadoCivil.java
+END
+Membro.java
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/11/SISAD/app/models/Membro.java
+END
+Endereco.java
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/11/SISAD/app/models/Endereco.java
+END
+TipoLogradouro.java
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/11/SISAD/app/models/TipoLogradouro.java
+END
+Pessoa.java
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/18/SISAD/app/models/Pessoa.java
+END
+Estado.java
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/6/SISAD/app/models/Estado.java
+END
+TipoSituacaoMembro.java
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/11/SISAD/app/models/TipoSituacaoMembro.java
+END
+Noticia.java
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/10/SISAD/app/models/Noticia.java
+END
+Calendario.java
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2/SISAD/app/models/Calendario.java
+END
+Cidade.java
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/6/SISAD/app/models/Cidade.java
+END
+Congregacao.java
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/11/SISAD/app/models/Congregacao.java
+END
+Pais.java
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/2/SISAD/app/models/Pais.java
+END
+TipoEstadoCivil.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/12/SISAD/app/models/TipoEstadoCivil.java
+END
+TipoConsagracao.java
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/11/SISAD/app/models/TipoConsagracao.java
+END
+NivelFormacao.java
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/12/SISAD/app/models/NivelFormacao.java
+END
+ConsagracaoMembro.java
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/11/SISAD/app/models/ConsagracaoMembro.java
+END

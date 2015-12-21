@@ -1,0 +1,75 @@
+#{extends 'include.html' /} 
+#{set title:'SISAD - Sistema de Secretaria da Assembléia de Deus' /}
+
+<head>
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<script type="text/javascript">
+	function voltar() {
+		window.open("@{Calendarios.cadastroEventoCalendario}", "_top");
+	}
+</script>
+
+#{cabecalho/}
+</br>
+
+<body>
+
+#{if !listaDados.empty}
+	<table width="40%" align="center">
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th align="center" colspan="2"> 
+					${nomeEvento}_${ano}.${periodo}
+				</th>
+				<td>
+				</td>
+				<td>
+				</td>
+			</tr>
+			
+			#{list items: listaDados, as:'dado'}
+				<tr>
+					<td align="right" width="48%">
+						${dado.denominacao} :
+					</td>
+					<td align="left" width="48%">
+						de 
+						<b> ${dado.diaInicio}/${meses[dado.mesInicio - 1]} </b>  
+						até 
+						<b> ${dado.diaFim}/${meses[dado.mesFim - 1]} </b> 
+					</td>
+					<td align="center" width="2%">
+						<a href="@{Calendarios.alterarDadosCalendario(dado.id)}">
+							<img alt="alterar" src="/public/images/utilCRUD/alterar_icon.JPG" width="20px" height="20px">
+						</a>
+					</td>
+					<td align="center" width="2%">
+						<a href="@{Calendarios.removeDadosCalendario(dado.id, dado.calendario.id)}">
+							<img alt="remover" src="/public/images/utilCRUD/remover.jpg" width="20px" height="20px" onclick="return confirm('Confirma?')">
+						</a>
+					</td>
+				</tr>
+			#{/list}
+			
+		<tfoot align="center">
+			<tr>
+				<td colspan="3">
+					<input type="button" value="voltar" onclick="voltar()"/>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+#{/if}
+
+#{if listaDados.empty}
+	<div align="center">
+		<p style="color: red;"> Nenhum Dado Cadastrado no calendario. </p> </br>
+		<input type="button" value="voltar" onclick="voltar()"/>
+	</div>
+#{/if}
+
+</body>
+
+#{rodape/}

@@ -1,0 +1,79 @@
+#{extends 'include.html' /} 
+#{set title:'SISAD - Sistema de Secretaria da Assembléia de Deus' /}
+
+<head>
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<script type="text/javascript">
+	function voltar() {
+		window.open("@{Calendarios.cadastroEventoCalendario}", "_top");
+	}
+</script>
+
+#{cabecalho/}
+</br>
+
+<body>
+
+	<form action="@{Calendarios.alteraEventoCalendario()}" method="GET">
+	
+		<table class="subFormulario" align="center" style="width: 23%">
+			<tbody align="left">
+			
+				<tr>
+					<th colspan="3" align="center">
+						Cadastro de Evento
+					</th>
+				</tr>
+				<tr>
+					<td> Nome Evento*: </td>
+					<td> <input type="text" name="nomeEvento"  value="${calendario?.nomeEvento}"/> </td>
+				</tr>
+				<tr>
+					<td>
+						Ano*:
+					</td>
+					<td>
+						<input type="text" id="ano" value="${calendario?.ano}" name="ano" size="7"  maxlength="4"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Periodo*:
+					</td>
+					#{if calendario.periodo == 1}
+						<td>
+							<select id="periodo" name="periodo">
+								<option value="1" selected="selected">Primeiro Semestre</option>
+								<option value="2">Segundo Semestre</option>
+							</select>
+						</td>
+					#{/if}
+					#{if calendario.periodo == 2}
+						<td>
+							<select id="periodo" name="periodo">
+								<option value="1">Primeiro Semestre</option>
+								<option value="2" selected="selected">Segundo Semestre</option>
+							</select>
+						</td>
+					#{/if}
+					<input type="hidden" name="id" value="${calendario?.id}"/>
+				</tr>
+			
+			</tbody>
+			<tfoot align="center">
+				<tr>
+					<td colspan="3">
+						<input type="submit" value="cadastrar"/>
+						<input type="button" value="voltar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+
+</body>
+
+#{rodape/}

@@ -1,0 +1,98 @@
+#{extends 'include.html' /} 
+#{set title:'Cadastro Pessoa' /}
+<script type="text/javascript">
+	function home(){
+		window.open("@{Application.main}","_top");
+	}
+</script>
+
+<head>
+</head>
+#{cabecalho/}
+<body>
+	
+	<form action="@{Membros.cadastrarPessoa(Pessoa)}" method="GET">
+		<!-- &nbsp; -->
+		
+		<table class="formulario" align="center" style="width: 60%">
+		<caption>Cadastar Pessoa</caption>
+			<tbody align="center">
+			
+				<tr>
+				#{field 'pessoa.cpf'}
+				<p class="${field.errorClass}">
+					<td align="right">CPF*:</td>
+					<td align="left" colspan="5">	
+						<input type="text" name="${field.name}" size="16" value="${pessoa?.cpf}"> *
+					</td>
+				<p class="${field.errorClass}">
+				#{/field}
+				</tr>
+				<tr>
+					<td align="right">Nome*:</td>
+					<td align="left" colspan="5">
+						<input type="Text" style="width: 70%" name="nome" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Sexo*:</td>
+					<td align="left" >
+						<input type="radio" style="width: 5%" name="sexo" value="M"/>Macho
+						<input type="radio" style="width: 5%" name="sexo" value="F"/>Feminino
+					</td>
+					<td align="right"> Data de Nascimento*:</td>
+					<td align="left" colspan="3">
+						<input type="text" size="10" name="${field.name}" class="datepicker" value="${booking?.checkinDate?.format('yyyy-MM-dd')}">
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Nº Cart. Identidade*:</td>
+					<td align="left" >
+						<input type="text" style="width: 50%" name="identidade" maxlength="10" />
+					</td>
+					<td align="right">Órgão Emissor/Estado*:</td>
+					<td align="left" colspan="3">
+						<input type="text" name="emissor"  />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Nome do Pai:</td>
+					<td align="left" colspan="5">
+						<input type="Text" style="width: 70%" name="nomePai" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Nome da M�e:</td>
+					<td align="left" colspan="5">
+						<input type="Text" style="width: 70%" name="nomeMae" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">Estado*:</td>
+					<td align="left" >
+						<input type="Text" style="width: 70%" name="nomeEstado" />
+					</td>
+					<td align="right"> Naturalidade*:</td>
+					<td align="left" colspan="3">
+						<input type="Text" style="width: 70%" name="nomeCidade" />
+					</td>
+				</tr>
+				
+				
+			</tbody>
+			
+			<tfoot align="center">
+			
+				<tr>
+					<td colspan="6">
+						<input type="submit" value="cadastrar"/>
+						<input type="button" value="Cancelar" onclick="home()"/>
+					</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+	</form>
+	
+</body>
+#{rodape/}

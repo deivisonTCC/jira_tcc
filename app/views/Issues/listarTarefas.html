@@ -1,0 +1,66 @@
+#{extends 'include.html' /} 
+#{set title:'Listar Tarefas' /}
+
+<script type="text/javascript">
+	function voltar(){
+		window.open("@{Application.index}","_top");
+	}
+</script>
+
+<head>
+
+</head>
+
+
+<body>
+
+	#{if issues.empty}
+		<div align="center">
+			<p style="color: red;"> Nenhuma Tarefa Cadastrada no sistema. </p>
+		</div>
+	#{/if}
+
+	#{if !issues.empty}
+	<table width="100%" align="center">
+		<caption class="legend1">
+			Listagem de Tarefas
+		</caption>
+		<thead>
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th width="1%" align="center"> 
+					Id
+				</th>
+				<th width="1%" align="center"> 
+					Reporter
+				</th>
+				<th width="1%" align="center"> 
+					Assignee
+				</th>
+			</tr>
+			
+			#{list items: issues, as:'issues'}
+				<tr>
+					<td align="center">
+						${issues.id}
+					</td>
+
+					<td align="center">
+						${issues.reporter}
+					</td>
+
+					<td align="center">
+						${issues.assignee}
+					</td>
+				</tr>
+			#{/list}
+		</thead>
+	</table>
+	#{/if}
+	
+	</br>
+	
+	<div style="width: 100%" align="center" >
+		<input type="button" value="Voltar" onclick="voltar()"/>
+	</div>
+	
+</body>

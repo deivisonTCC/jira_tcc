@@ -1,0 +1,89 @@
+#{extends 'include.html' /} 
+#{set title:'SISAD - Sistema de Secretaria da Assembléia de Deus' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/login-box.css'}"/>
+</head>
+
+<body>
+	<form action="@{Application.login()}" method="GET">
+	
+	<div style="padding: 100px 0 0 250px;" >
+		<table>
+			<tr>
+				<td>
+					#{erros/}					
+				</td>
+			</tr>	
+			<tr>
+				<td>
+					<div id="login-body" style="padding: 330px 0 0 550px;"/>
+				</td>
+				<td>
+					<div id="login-box">
+						
+						<H2>SISAD</H2>
+						
+						<div id="login-box-name" style="margin-top:20px;">Usuario:</div>
+							<div id="login-box-field" style="margin-top:20px;">
+								<input name="email" class="form-login" title="Username" value="" size="30" maxlength="2048" />
+							</div>
+						<div id="login-box-name">Senha:</div>
+							<div id="login-box-field">
+								<input name="senha" type="password" class="form-login" title="Password" size="30" maxlength="2048" />
+							</div>
+						<br />
+						<span class="login-box-options">
+							<input type="checkbox" name="1" value="1"> Lembrar-me </input>
+						</span>
+						<a href="#" style="margin-left:30px;">Esqueceu sua senha?</a>
+						<br />
+						<br />
+						<table>
+							<tr>
+								<td>
+									<input type="image" src="@{'/public/images/login/login-btn.png'}" width="103" height="42" style="margin-left:90px;" value="submit"></input>
+								</td>
+								<!-- <td>
+									<input type="image" src="@{'/public/images/login/bt-cd.png'}" width="103" height="48" style="margin-left:10px;" onclick="cadastrar()"></input>
+								</td>	 -->				
+							</tr>
+						</table>
+						<br />
+						
+					
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>
+
+<div>
+	<table width="65%" align="center">
+		<tr>
+			<td width="100" colspan="2" align="center">
+				<h3 class="noticias"> Notícias e Comunicados  </h3>
+			</td>
+		</tr>
+		#{list items: noticias, as:'noticia'}
+			<tr>
+				<td> 
+					<h4 style="color: blue;"> ${noticia.tituloNoticia} </h4> 
+				</td>
+			</tr>
+			<tr>
+				<td>
+					${noticia.noticia}
+				</td>	
+			</tr>
+		#{/list}
+	</table>
+	
+</div>
+
+</body>
+</html>

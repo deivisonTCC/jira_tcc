@@ -1,0 +1,65 @@
+/**
+ * 
+ */
+package models;
+
+import java.util.Date;
+
+/**
+ * @author Joab
+ *
+ */
+public class EstadoCivil {
+
+	private Integer id;
+	
+	private TipoEstadoCivil situacaoAtual;
+	
+	private TipoEstadoCivil situacaoAnterior;
+	
+	/**Conforma certidao.*/
+	private String nomeConjuge;
+	
+	private Date dataSituacaoAtual;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public TipoEstadoCivil getSituacaoAtual() {
+		return situacaoAtual;
+	}
+
+	public void setSituacaoAtual(TipoEstadoCivil situacaoAtual) {
+		this.situacaoAtual = situacaoAtual;
+	}
+
+	public TipoEstadoCivil getSituacaoAnterior() {
+		return situacaoAnterior;
+	}
+
+	public void setSituacaoAnterior(TipoEstadoCivil situacaoAnterior) {
+		this.situacaoAnterior = situacaoAnterior;
+	}
+
+	public String getNomeConjuge() {
+		return nomeConjuge;
+	}
+
+	public void setNomeConjuge(String nomeConjuge) {
+		this.nomeConjuge = nomeConjuge;
+	}
+
+	public Date getDataSituacaoAtual() {
+		return dataSituacaoAtual;
+	}
+
+	public void setDataSituacaoAtual(Date dataSituacaoAtual) {
+		this.dataSituacaoAtual = dataSituacaoAtual;
+	}
+	
+}

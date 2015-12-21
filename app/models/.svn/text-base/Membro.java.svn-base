@@ -1,0 +1,205 @@
+/**
+ * 
+ */
+package models;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import play.db.jpa.Model;
+
+/**
+ * @author Joab
+ *membro da instituição
+ */
+@Entity
+@Table(name = "membro")
+public class Membro extends Model implements Serializable{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	private String rol;
+	
+	private Pessoa pessoa;
+	
+	private Congregacao congregacao;
+	
+	/**cidade onde fica localizada a sede de sua congregação*/
+	private Cidade campoEclesiastico;
+	
+	/**templo, destrito ou cidade.*/
+	private String localBatismo;
+	
+	private String profissao;
+	
+	/**aptidões*/
+	private String habilitacaoProfissional;
+	
+	private String empregoAtual;
+	
+	private String funcao;
+	
+	/**telefone de pode torna-se um objeto*/
+	private String telefoneTrabalho;
+	
+	private TipoSituacaoMembro situacao;
+	
+	private ConsagracaoMembro consagracao;
+	
+	private Date dataConversao;
+	
+	private Date dataBatismoEspiritoSanto;
+	
+	private Date dataBatismoAguas;
+	
+	private Date membroDesde;
+	
+	public Membro(){
+	}	
+	
+	public Date getDataConversao() {
+		return dataConversao;
+	}
+
+	public void setDataConversao(Date dataConversao) {
+		this.dataConversao = dataConversao;
+	}
+
+	public Date getDataBatismoEspiritoSanto() {
+		return dataBatismoEspiritoSanto;
+	}
+
+	public void setDataBatismoEspiritoSanto(Date dataBatismoEspiritoSanto) {
+		this.dataBatismoEspiritoSanto = dataBatismoEspiritoSanto;
+	}
+
+	public Date getDataBatismoAguas() {
+		return dataBatismoAguas;
+	}
+
+	public void setDataBatismoAguas(Date dataBatismoAguas) {
+		this.dataBatismoAguas = dataBatismoAguas;
+	}
+
+	public Date getMembroDesde() {
+		return membroDesde;
+	}
+
+	public void setMembroDesde(Date membroDesde) {
+		this.membroDesde = membroDesde;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public Congregacao getCongregacao() {
+		return congregacao;
+	}
+
+	public void setCongregacao(Congregacao congregacao) {
+		this.congregacao = congregacao;
+	}
+
+	public Cidade getCampoEclesiastico() {
+		return campoEclesiastico;
+	}
+
+	public void setCampoEclesiastico(Cidade campoEclesiastico) {
+		this.campoEclesiastico = campoEclesiastico;
+	}
+
+	public String getLocalBatismo() {
+		return localBatismo;
+	}
+
+	public void setLocalBatismo(String localBatismo) {
+		this.localBatismo = localBatismo;
+	}
+
+	public String getProfissao() {
+		return profissao;
+	}
+
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
+	}
+
+	public String getHabilitacaoProfissional() {
+		return habilitacaoProfissional;
+	}
+
+	public void setHabilitacaoProfissional(String habilitacaoProfissional) {
+		this.habilitacaoProfissional = habilitacaoProfissional;
+	}
+
+	public String getEmpregoAtual() {
+		return empregoAtual;
+	}
+
+	public void setEmpregoAtual(String empregoAtual) {
+		this.empregoAtual = empregoAtual;
+	}
+
+	public String getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+
+	public String getTelefoneTrabalho() {
+		return telefoneTrabalho;
+	}
+
+	public void setTelefoneTrabalho(String telefoneTrabalho) {
+		this.telefoneTrabalho = telefoneTrabalho;
+	}
+
+	public TipoSituacaoMembro getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(TipoSituacaoMembro situacao) {
+		this.situacao = situacao;
+	}
+
+	public ConsagracaoMembro getConsagracao() {
+		return consagracao;
+	}
+
+	public void setConsagracao(ConsagracaoMembro consagracao) {
+		this.consagracao = consagracao;
+	}
+	
+	
+}

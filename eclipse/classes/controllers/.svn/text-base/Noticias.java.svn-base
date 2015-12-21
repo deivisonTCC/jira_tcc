@@ -1,0 +1,214 @@
+package controllers;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Calendario;
+import models.DadosCalendario;
+import models.Noticia;
+import play.db.DB;
+import play.mvc.Controller;
+import util.ValidatorUtil;
+
+public class Noticias extends Controller {
+	
+	public static void gerenciarNoticia() throws SQLException{
+		
+		List<Noticia> noticias = new ArrayList<Noticia>();
+		
+		noticias = buscarNoticias();
+		
+		render(noticias);
+	}
+	
+	public static void cadastrarNoticia(String tituloNoticia, String noticia) throws SQLException{
+		
+		if(ValidatorUtil.isEmpty(tituloNoticia) && ValidatorUtil.isEmpty(noticia)){
+			flash.error("Os campos devem ser preenchidos.");
+			gerenciarNoticia();
+		}
+		if(ValidatorUtil.isEmpty(tituloNoticia)){
+			flash.error("Título da Notícia: Campo obrigatório deve ser preenchido.");
+			gerenciarNoticia();
+		}
+		if(ValidatorUtil.isEmpty(noticia)){
+			flash.error("Notícia: Campo obrigatório deve ser preenchido.");
+			gerenciarNoticia();
+		}
+		
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "INSERT INTO noticia (titulo_noticia, noticia) VALUES (  ' " + tituloNoticia.toUpperCase() + " ' , ' " + noticia + " ' );";
+		
+		System.out.println(sql);
+		
+		try {
+			s = con.createStatement();
+			rs = s.execute(sql); // execute usado para insert
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs == true)
+				; // não faz nada, apenas para remover warning
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		flash.success("Notícia cadastrada com sucesso.");
+		
+		gerenciarNoticia();
+	}
+	
+	public static List<Noticia> buscarNoticias() throws SQLException{
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		List<Noticia> noticias = new ArrayList<Noticia>();
+		
+		String sql = "SELECT * FROM noticia WHERE 1=1;";
+		
+		try {
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				Noticia noticia = new Noticia();
+				noticia.setId(rs.getLong("id"));
+				noticia.setTituloNoticia(rs.getString("titulo_noticia"));
+				noticia.setNoticia(rs.getString("noticia"));
+				noticias.add(noticia);
+			}
+		}catch(SQLException sqlex) {
+			sqlex.printStackTrace();
+			flash.error("Falha na busca de Notícias.");
+		} finally {
+			if (rs != null)
+				rs.close(); // usado quando o rs for do tipo ResultSet
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		session.put("Noticias", noticias);
+		
+		return noticias;
+	}
+	
+	public static void removeNoticia(int idNoticia) throws SQLException{
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+
+		String sql = "DELETE FROM noticia WHERE noticia.id = " + idNoticia + " ;";
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.execute(sql); 
+			
+			flash.success("Notícia excluida com sucesso.");
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs == true)
+				;
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		gerenciarNoticia();
+		
+	}
+	
+	public static void editarNoticia(int idNoticia) throws SQLException{
+		ResultSet rs = null;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "SELECT * FROM noticia WHERE noticia.id = " + idNoticia + " ;";
+		
+		Noticia noticia = new Noticia();
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.executeQuery(sql);
+			
+			while(rs.next()){
+				noticia.setId(rs.getLong("id"));
+				noticia.setTituloNoticia(rs.getString("titulo_noticia"));
+				noticia.setNoticia(rs.getString("noticia"));
+			}
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		} finally {
+			if (rs != null)
+				rs.close(); // usado quando o rs for do tipo ResultSet
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		}
+		
+		render(noticia);
+	}
+	
+	public static void alterarNoticia(int idNoticia, String tituloNoticia, String noticia) throws SQLException{
+		
+		boolean rs = false;
+		Connection con = null;
+		Statement s = null;
+		
+		con = DB.getConnection();
+		
+		String sql = "UPDATE noticia SET"
+				+ " id= " + idNoticia + " ,"
+				+ " titulo_noticia= '" + tituloNoticia + "'  , "
+				+ "noticia= '" + noticia + "' "
+				+ "  WHERE id = " + idNoticia + ";";
+		
+		try {
+			
+			s = con.createStatement();
+			rs = s.execute(sql); 
+			
+			flash.success("Noticia alterada com sucesso.");
+			
+		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
+		}finally {
+			if (rs == true)
+				;
+			if (s != null)
+				s.close();
+			if (con != null)
+				con.close();
+		
+			gerenciarNoticia();
+		}
+
+	}
+}

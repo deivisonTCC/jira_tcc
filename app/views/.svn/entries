@@ -1,0 +1,83 @@
+10
+
+dir
+12
+https://sisad.googlecode.com/svn/SISAD/app/views
+https://sisad.googlecode.com/svn
+
+
+
+2014-06-10T10:18:44.757664Z
+12
+joabfgal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+28eacaec-d292-32cc-b0e5-9f4fae866dbe
+
+Application
+dir
+
+Calendarios
+dir
+
+Membros
+dir
+
+Noticias
+dir
+
+Usuarios
+dir
+
+errors
+dir
+
+include.html
+file
+
+
+
+
+2014-06-07T17:46:03.015000Z
+7cb8223a0a6b8c92d7dc64065185d022
+2014-06-02T02:21:17.544718Z
+6
+joabfgal
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1159
+
+tags
+dir
+

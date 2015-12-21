@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/9/SISAD/app/views/Usuarios
+END
+cadastroUsuario.html
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/13/SISAD/app/views/Usuarios/cadastroUsuario.html
+END
+listarUsuarios.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/14/SISAD/app/views/Usuarios/listarUsuarios.html
+END
+editarUsuario.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/16/SISAD/app/views/Usuarios/editarUsuario.html
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/2/SISAD/app/views/Usuarios/index.html
+END
+buscarUsuario.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/14/SISAD/app/views/Usuarios/buscarUsuario.html
+END

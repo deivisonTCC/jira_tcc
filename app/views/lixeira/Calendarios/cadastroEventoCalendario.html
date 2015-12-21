@@ -1,0 +1,121 @@
+#{extends 'include.html' /} 
+#{set title:'SISAD - Sistema de Secretaria da Assembléia de Deus' /}
+
+<head>
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<script type="text/javascript">
+	function voltar() {
+		window.open("@{Calendarios.menuCalendario}", "_top");
+	}
+</script>
+
+#{cabecalho/}
+</br>
+
+<body>
+
+	<form action="@{Calendarios.cadastroEvento}" method="GET">
+	
+		<table class="subFormulario" align="center" style="width: 23%">
+			<tbody align="left">
+			
+				<tr>
+					<th colspan="3" align="center" width="">
+						Cadastro de Evento
+					</th>
+				</tr>
+				<tr>
+					<td> Nome Evento*: </td>
+					<td> <input type="text" name="nomeEvento"/> </td>
+				</tr>
+				<tr>
+					<td>
+						Ano*:
+					</td>
+					<td>
+						<input type="text" id="ano" name="ano" size="7"  maxlength="4"/>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Periodo*:
+					</td>
+					<td>
+						<select id="periodo" name="periodo">
+							<option value="1">Primeiro Semestre</option>
+							<option value="2">Segundo Semestre</option>
+						</select>
+					</td>
+				</tr>
+			
+			</tbody>
+			<tfoot align="center">
+				<tr>
+					<td colspan="3">
+						<input type="submit" value="cadastrar"/>
+						<input type="button" value="voltar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		
+		</br>
+		</br>
+		
+		#{if !calendarios.empty}
+			<table width="40%" align="center">
+				<thead>
+					<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+						<th width="90%" align="center"> 
+							Listagem de Eventos
+						</th>
+						<th width="5%" align="center"> 
+						</th>
+						<th width="5%" align="center"> 
+						</th>
+						<th width="5%" align="center"> 
+						</th>
+					</tr>
+					
+					#{list items: calendarios, as:'calendario'}
+						<tr>
+							<td>
+								Calendario ${calendario.ano}.${calendario.periodo} </br>
+								&nbsp;${calendario.nomeEvento}
+							</td>
+							<td align="center">
+								<a href="@{Calendarios.editarEventoCalendario(calendario.id)}">
+									<img alt="alterar" src="/public/images/utilCRUD/alterar_icon.JPG" width="20px" height="20px">
+								</a>
+							</td>
+							<td align="center">
+								<a href="@{Calendarios.removeEventoCalendario(calendario.id)}">
+									<img alt="remover" src="/public/images/utilCRUD/remover.jpg" width="20px" height="20px" onclick="return confirm('Confirma?')">
+								</a>
+							</td>
+							<td align="center">
+								<a href="@{Calendarios.listarDadosCalendario(calendario.id)}">
+									<img alt="visualizar" src="/public/images/utilCRUD/lupa.JPG">
+								</a>
+							</td>
+						</tr>
+					#{/list}
+				</thead>
+			</table>
+		
+		#{/if}
+		
+		#{if calendarios.empty}
+			<div align="center">
+				<p style="color: red;"> Nenhum Calendario Cadastrado no sistema. </p>
+			</div>
+		#{/if}
+	
+	</form>
+
+</body>
+
+#{rodape/}

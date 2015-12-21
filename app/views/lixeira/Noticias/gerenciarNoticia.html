@@ -1,0 +1,101 @@
+#{extends 'include.html' /}
+#{set title:'SISAD' /}
+
+<script type="text/javascript">
+	function voltar(){
+		window.open("@{Application.main}","_top");
+	}
+</script>
+
+<head>
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+#{cabecalho/}
+
+<body>
+
+	<form action="@{Noticias.cadastrarNoticia()}" method="GET">
+		<table class="subFormulario" align="center" style="width: 53%">
+			<tbody align="left">
+			
+				<tr>
+					<th colspan="3" align="center">
+						Cadastro de Notícias
+					</th>
+				</tr>
+				<tr>
+					<td> Titulo da Notícia*: </td>
+					<td> <input type="text" name="tituloNoticia" size="60" maxlength="150"/> </td>
+				</tr>
+				<tr>
+					<td>
+						Notícias*:
+					</td>
+					<td>
+						<textarea rows="10" cols="80" name="noticia"></textarea>
+					</td>
+				</tr>			
+			</tbody>
+			<tfoot align="center">
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="cadastrar"/>
+						<input type="button" value="Cancelar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		
+		</br>
+		</br>
+		
+		<table width="60%" align="center">
+			<thead>
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th width="2%" align="center"> 
+					id
+				</th>
+				<th width="30%" align="center"> 
+					Título da Notícia
+				</th>
+				<th width="61%" align="center"> 
+					Notícia
+				</th>
+				<th width="3%" align="center"> 
+				</th>
+				<th width="3%" align="center"> 
+				</th>
+			</tr>
+			
+			#{list items: noticias, as:'noticia'}
+			<tr>
+				<td>
+					${noticia.id}
+				</td>
+				<td> 
+					${noticia.tituloNoticia} 
+				</td>
+				<td>
+					${noticia.noticia}
+				</td>
+				<td align="center">
+					<a href="@{Noticias.removeNoticia(noticia.id)}">
+						<img alt="remover" src="/public/images/utilCRUD/remover.jpg" width="20px" height="20px" onclick="return confirm('Confirma?')">
+					</a>
+				</td>
+				<td align="center">
+					<a href="@{Noticias.editarNoticia(noticia.id)}">
+						<img alt="visualizar" src="/public/images/utilCRUD/alterar_icon.JPG" width="20px" height="20px">
+					</a>
+				</td>
+			</tr>
+			#{/list}
+			</thead>
+		</table>
+	</form>
+
+</body>
+
+#{rodape/}

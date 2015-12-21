@@ -1,0 +1,265 @@
+/**
+ * 
+ */
+package models;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import play.data.validation.Required;
+import play.db.jpa.Model;
+
+/**
+ * @author Joab
+ *
+ */
+@Entity
+@Table(name = "pessoa")
+public class Pessoa extends Model implements Serializable{
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Required
+	private String nome;
+	
+	@Required
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
+	
+	@Required
+	private char sexo;
+	
+	@Required
+	private String cpf;
+	
+	private String passaporte;
+	
+	private String nomePai;
+	
+	private String nomeMae;
+	
+	private Cidade naturalidade;
+	
+	/**Caso a cidade de origem nao esteja presente no banco.*/
+	private String naturalidadeOutro;
+	
+	private Estado UF;
+	
+	@Required
+	private String identidade;
+	
+	@Required
+	private String orgaoEmissor;
+	
+	//private Estado UFIdentidade;
+	
+	private TipoEstadoCivil estadoCivil;
+			
+	private Endereco endereco;
+	
+	private String telefone;
+	
+	private String celular;
+	
+	private int codAreaCelular;
+	
+	private int codAreaTelefone;
+	
+	private String email;
+	
+	private NivelFormacao nivelEnsino;
+	
+	private NivelFormacao nivelTeologico;
+	
+/*	public void getNomeCpf(){
+		System.out.println(this.nome + " - " + this.cpf );
+	}*/
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public char getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(char sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getPassaporte() {
+		return passaporte;
+	}
+
+	public void setPassaporte(String passaporte) {
+		this.passaporte = passaporte;
+	}
+
+	public String getNomePai() {
+		return nomePai;
+	}
+
+	public void setNomePai(String nomePai) {
+		this.nomePai = nomePai;
+	}
+
+	public String getNomeMae() {
+		return nomeMae;
+	}
+
+	public void setNomeMae(String nomeMae) {
+		this.nomeMae = nomeMae;
+	}
+
+	public String getNaturalidadeOutro() {
+		return naturalidadeOutro;
+	}
+
+	public void setNaturalidadeOutro(String naturalidadeOutro) {
+		this.naturalidadeOutro = naturalidadeOutro;
+	}
+
+	
+	public String getIdentidade() {
+		return identidade;
+	}
+
+	public void setIdentidade(String identidade) {
+		this.identidade = identidade;
+	}
+
+	public String getOrgaoEmissor() {
+		return orgaoEmissor;
+	}
+
+	public void setOrgaoEmissor(String orgaoEmissor) {
+		this.orgaoEmissor = orgaoEmissor;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public int getCodAreaCelular() {
+		return codAreaCelular;
+	}
+
+	public void setCodAreaCelular(int codAreaCelular) {
+		this.codAreaCelular = codAreaCelular;
+	}
+
+	public int getCodAreaTelefone() {
+		return codAreaTelefone;
+	}
+
+	public void setCodAreaTelefone(int codAreaTelefone) {
+		this.codAreaTelefone = codAreaTelefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public Cidade getNaturalidade() {
+		return naturalidade;
+	}
+
+	public void setNaturalidade(Cidade naturalidade) {
+		this.naturalidade = naturalidade;
+	}
+
+	public Estado getUF() {
+		return UF;
+	}
+
+	public void setUF(Estado uF) {
+		UF = uF;
+	}
+
+	public TipoEstadoCivil getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(TipoEstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public NivelFormacao getNivelEnsino() {
+		return nivelEnsino;
+	}
+
+	public void setNivelEnsino(NivelFormacao nivelEnsino) {
+		this.nivelEnsino = nivelEnsino;
+	}
+
+	public NivelFormacao getNivelTeologico() {
+		return nivelTeologico;
+	}
+
+	public void setNivelTeologico(NivelFormacao nivelTeologico) {
+		this.nivelTeologico = nivelTeologico;
+	}
+	
+}

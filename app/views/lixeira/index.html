@@ -1,0 +1,216 @@
+#{extends 'include.html' /} 
+#{set title:'Jira - Funcionalidades Extras' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich">
+
+<!-- <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/magia.css'}"/>
+	
+</head> -->
+
+<script type="text/javascript">
+	function listar() {
+		window.open("@{Application.listaTodosLinks}", "_top");
+	}
+</script>
+
+<body>
+	<form action="@{Application.index()}" method="get">
+		<table align="center" width="50%" class="minimal-style">
+			<caption> Buscar por Tarefas </caption>
+			<thead>
+				<tr>
+					<td>
+						<input type="checkbox" name="checkprojeto" />
+					</td>
+					<td>
+						Projeto:
+					</td>
+					<td align="left">
+						<input type="text" name="projeto" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="checkabertapor" />
+					</td>
+					<td>
+						Aberta por:
+					</td>
+					<td align="left">
+						<input type="text" name="abertapor" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="checkresponsavel" />
+					</td>
+					<td>
+						Responsável:
+					</td>
+					<td align="left">
+						<input type="text" name="responsavel" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="checksituacao" />
+					</td>
+					<td>
+						Situação:
+					</td>
+					<td align="left">
+						<select name="situacao">
+							<option value="0" label="--Selecione--" />
+							<option value="1" label="Open" />
+							<option value="10000" label="To Do" />
+							<option value="10001" label="Done" />
+							<option value="3" label="In Progress" />
+							<option value="4" label="Reopened" />
+							<option value="5" label="Resolved" />
+							<option value="6" label="Closed" />
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="checkprioridade" />
+					</td>
+					<td>
+						Prioridade:
+					</td>
+					<td align="left">
+						<select name="prioridade">
+							<option value="0" label="--Selecione--" />
+							<option value="1" label="Blocker" />
+							<option value="2" label="Critical" />
+							<option value="3" label="Major" />
+							<option value="4" label="Minor" />
+							<option value="5" label="Trivial" />
+							<option value="6" label="Medium" />
+							<option value="7" label="data da frente" />
+							<option value="8" label="Closed" />
+							<option value="9" label="Open" />
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="checkbox" name="checktipo" />
+					</td>
+					<td>
+						Tipo:
+					</td>
+					<td align="left">
+						<select name="tipo">
+							<option value="0" label="--Selecione--" />
+							<option value="1" label="Bug" />
+							<option value="2" label="New Feature" />
+							<option value="3" label="Task" />
+							<option value="4" label="Improvement" />
+							<option value="5" label="Sub-task" />
+							<option value="10000" label="Teste" />
+							<option value="10100" label="Story" />
+							<option value="10101" label="implementar para mostrar no grid REDOCORR" />
+							<option value="10102" label="trazer no grid REDOCORR" />
+							<option value="10103" label="Historia Tecnica" />
+							<option value="10104" label="Equip. Paral." />
+							<option value="10105" label="Mensagens e Paginação" />
+						</select>
+					</td>
+				</tr>
+			</thead>
+			<tfoot align="center">
+				<tr>
+					<td colspan="3">
+						<input type="submit" value="Buscar"/>
+						<input type="button" value="Listar Relações" onclick="listar()"/>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+	
+	</br>
+	</br>
+	
+	#{if issues.empty}
+		<div align="center">
+			<p style="color: red;"> Nenhuma Tarefa Cadastrada no sistema. </p>
+		</div>
+	#{/if}
+
+	#{if !issues.empty}
+	<table width="100%" align="center" class="box-style">
+		<thead>
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th width="1%" align="center"> 
+					Id
+				</th>
+				<th width="1%" align="center"> 
+					Projeto 
+				</th>
+				<th width="1%" align="center"> 
+					Aberta Por
+				</th>
+				<th width="1%" align="center"> 
+					Responsável 
+				</th>
+				<th width="1%" align="center"> 
+					Situação 
+				</th>
+				<th width="1%" align="center"> 
+					Prioridade 
+				</th>
+				<th width="1%" align="center"> 
+					Tipo 
+				</th>
+				
+				<th width="1%" align="center">  
+				</th>
+			</tr>
+			
+			#{list items: issues, as:'issue'}
+				<tr>
+					<td align="center">
+						${issue.id}
+					</td>
+					
+					<td align="center">
+						${issue.environment}
+					</td>
+					
+					<td align="center">
+						${issue.creator}
+					</td>
+					
+					<td align="center">
+						${issue.assignee}
+					</td>
+					
+					<td align="center">
+						${issue.issuestatus}
+					</td>
+					
+					<td align="center">
+						${issue.priority}
+					</td>
+					
+					<td align="center">
+						${issue.issuetype}
+					</td>
+					
+					<td align="center">
+						<a href="@{Application.detalharTarefa(issue.id)}">
+							<img alt="Alterar Usuario"  src="/public/images/utilCRUD/lupa.JPG" width="25px" height="25px" >	
+						</a>
+					</td>
+				</tr>
+			#{/list}
+		</thead>
+	</table>
+	#{/if}
+</body>
+</html>

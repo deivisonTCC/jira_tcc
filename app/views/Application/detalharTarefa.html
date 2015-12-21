@@ -1,0 +1,142 @@
+#{extends 'include.html' /} 
+#{set title:'Jira - Detalhamento da Tarefa' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<body>
+	<form>
+		<table align="center" width="40%" class="minimal-style">
+			<caption class="legend1"> Buscar por Tarefas </caption>
+			<thead>
+				<tr>
+					<td width="30%" align="right">
+						Projeto : 
+					</td>
+					<td>
+						${issue.environment}
+					</td>
+				</tr>
+				<tr>
+					<td width="30%" align="right">
+						Aberta por : 
+					</td>
+					<td>
+						${issue.creator}
+					</td>
+				</tr>
+				<tr>
+					<td width="30%" align="right">
+						Responsável : 
+					</td>
+					<td>
+						${issue.assignee}
+					</td>
+				</tr>
+				<tr>
+					<td width="30%" align="right">
+						Situação : 
+					</td>
+					<td>
+						${issue.issuestatus}
+					</td>
+				</tr>
+				<tr>
+					<td width="30%" align="right">
+						Prioridade : 
+					</td>
+					<td>
+						${issue.priority}
+					</td>
+				</tr>
+				<tr>
+					<td width="30%" align="right">
+						Tipo : 
+					</td>
+					<td>
+						${issue.issuetype}
+					</td>
+				</tr>
+				<tr>
+					<td width="30%" align="right">
+						Descrição : 
+					</td>
+					<td align="justify">
+						${issue.description}
+					</td>
+				</tr>
+			</thead>
+		</table>
+			
+		</br>
+		</br>
+	
+	#{if subs.empty}
+		<div align="center">
+			<p style="color: red;"> Nenhuma Sub-Tarefa relacionada no sistema. </p>
+		</div>
+	#{/if}
+
+	#{if !subs.empty}
+	<table width="100%" align="center" class="box-style">
+		<thead>
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th width="1%" align="center"> 
+					Id
+				</th>
+				<th width="1%" align="center"> 
+					Projeto 
+				</th>
+				<th width="1%" align="center"> 
+					Aberta Por
+				</th>
+				<th width="1%" align="center"> 
+					Responsável 
+				</th>
+				<th width="1%" align="center"> 
+					Situação 
+				</th>
+				<th width="1%" align="center"> 
+					Prioridade 
+				</th>
+				<th width="1%" align="center"> 
+					Tipo 
+				</th>
+			</tr>
+			
+			#{list items: subs, as:'sub'}
+				<tr>
+					<td align="center">
+						${sub.id}
+					</td>
+					
+					<td align="center">
+						${sub.environment}
+					</td>
+					
+					<td align="center">
+						${sub.creator}
+					</td>
+					
+					<td align="center">
+						${sub.assignee}
+					</td>
+					
+					<td align="center">
+						${sub.issuestatus}
+					</td>
+					
+					<td align="center">
+						${sub.priority}
+					</td>
+					
+					<td align="center">
+						${sub.issuetype}
+					</td>
+				</tr>
+			#{/list}
+	#{/if}
+</form>
+
+</body>
+</html>

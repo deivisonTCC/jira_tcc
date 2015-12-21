@@ -1,0 +1,91 @@
+#{extends 'include.html' /} 
+#{set title:'Buscar Membro' /}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+	function home(){
+		window.open("@{Application.main}","_top");
+	}
+	function telaCadastro(){
+		window.open("@{Membros.cadastroPessoa}","_top");
+	}
+</script>
+
+#{cabecalho/}
+<body>
+	<form  method="GET"><!-- action="Membros.buscarMembro()"-->
+		
+		<table class="formulario" align="center" style="width: 40%">
+			<caption>Buscar Usuario</caption>
+			<tbody>
+				
+				<tr>
+					<th align="right">Rol:</th>
+					<td><input type="number" name="rol" class="login-box-field"/></td>
+				</tr>
+				<tr>
+					<th align="right">Nome:</th>
+					<td>
+						<input type="text" name="nome" class="login-box-field"/>
+					</td>
+				</tr>
+				<tr>
+					<th align="right">Situação:</th>
+					<td><input type="text" name="situacao" class="login-box-field"/></td>
+				</tr>
+			</tbody>
+			
+			<tfoot align="center">
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="Buscar"/>
+						<input type="button" value="Voltar" onclick="voltar()"/>
+					</td>
+				</tr>
+			</tfoot>
+			
+		</table>
+		
+	</form>
+		<br/>
+		<div align="center">
+			<input type="image" src="@{'/public/images/ADD-ICON.png'}" width="15px" height="15	px" style="margin-left:10px;" onclick="telaCadastro()">
+				<a onclick="telaCadastro()">Cadastrar Novo Membro</a>
+		</div>
+		<table width="90%" align="center" >
+		<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+			<th width="10%" align="center"> 
+				ROL
+			</th>
+			<th width="30%" align="center"> 
+				Nome
+			</th>
+			<th width="10%" align="center"> 
+				Título
+			</th>
+			<th width="10%" align="center"> 
+				Situação
+			</th>
+		</tr>
+		
+		#{list items: usuarios, as:'usuario'}
+			<tr>
+				<td align="center">
+					${usuario.nome}
+				</td>
+				<td align="center">
+					${usuario.sobrenome}
+				</td>
+				<td align="center">
+					${usuario.senha}
+				</td>
+				<td align="center">
+					${usuario.email}
+				</td>
+			</tr>
+		#{/list}
+	</table>
+	
+	
+</body>
+</html>
+#{rodape/}

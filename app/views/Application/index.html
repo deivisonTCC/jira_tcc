@@ -1,0 +1,97 @@
+#{extends 'include.html' /} 
+#{set title:'Jira - Funcionalidades Extras' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich">
+
+<script type="text/javascript">
+	function filtarTasksResponsavelStatus() {
+		window.open("@{Issues.filtarTasksResponsavelStatus}", "_top");
+	}
+	function filtarTaskBugSprint() {
+		window.open("@{BuscarTaskBugSprint.filtarTaskBugSprint}", "_top");
+	}
+	function filtarTaskProduto() {
+		window.open("@{BuscarTaskProduto.filtarTaskProduto}", "_top");
+	}
+	function filtarTaskBugFixes() {
+		window.open("@{BuscarTaskBugFixes.filtarTaskBugFixes}", "_top");
+	}
+	
+	function filtrarTaskTestePorBugFixes() {
+		window.open("@{BuscarTaskTestePorBugFixes.filtrarTaskTestePorBugFixes}", "_top");
+	}
+	function filtarTaskTesteEstoriaUsuario() {
+		window.open("@{BuscarTaskTesteEstoriaUsuario.filtarTaskTesteEstoriaUsuario}", "_top");
+	}
+	function filtarTaskQuantidadeTesteEstoria() {
+		window.open("@{BuscarTaskQuantidadeTesteEstoria.filtarTaskQuantidadeTesteEstoria}", "_top");
+	}
+	function filtarTaskQuantidadeRejeicoesTesteEstoria() {
+		window.open("@{BuscarTaskQuantidadeRejeicoesTesteEstoria.filtarTaskQuantidadeRejeicoesTesteEstoria}", "_top");
+	}
+
+	
+	function filtarTaskSprintBacklog() {
+		window.open("@{BuscarTaskSprintBacklog.filtarTaskSprintBacklog()}", "_top");
+	}
+</script>
+
+<body>
+
+<div align="center"  style="width: 100%;">
+	<div style="width: 40%;">	
+		<table class="table table-striped table-bordered" align="center">
+			<caption> Atividades Implementadas - TCC </caption>
+			<tr>
+				<th> Tasks por responsavel e por status: </th>
+				<td align="center"> 
+					<button type="button" class="btn btn-success" onclick="filtarTasksResponsavelStatus()">Entar</button> 
+				</td>
+			</tr>
+			
+			<tr>
+				<th> Tasks de bugs por responsavel e sprint: </th>
+				<td align="center"> 
+					<button type="button" class="btn btn-success" onclick="filtarTaskBugSprint()">Entar</button> 
+				</td>
+			</tr>
+			
+			<tr>
+				<th> Tasks por responsavel e projeto: </th>
+				<td align="center"> 
+					<button type="button" class="btn btn-success" onclick="filtarTaskProduto()">Entar</button>
+				</td>
+			</tr>
+			
+			<tr>
+				<th> Listar Tasks de bugs finalizadas: </th>
+				<td align="center"> 
+					<button type="button" class="btn btn-success" onclick="filtarTaskBugFixes()">Entar</button>
+				</td>
+			</tr>
+			
+	<!-- 		<tr>
+				<th> Quantidade de Tasks de Teste por estória de usuário: </th>
+				<td> <button type="button" class="btn btn-success">Entar</button> </td>
+			</tr> -->
+			
+<!-- 			<tr>
+				<th> Tasks do tipo story com issues bloqueantes : </th>
+				<td align="center"> <button type="button" class="btn btn-success" onclick="filtarTaskQuantidadeTesteEstoria()">Entar</button> </td>
+			</tr> -->
+			
+			<tr>
+				<th> Tasks do backlog filtrada por prioridade e status: </th>
+				<td align="center"> 
+					<button type="button" class="btn btn-success" onclick="filtarTaskSprintBacklog()">Entar</button> 
+				</td>
+			</tr>
+				
+		</table>
+	</div>
+</div>
+
+
+</body>
+</html>

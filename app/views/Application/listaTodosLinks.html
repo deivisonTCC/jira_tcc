@@ -1,0 +1,104 @@
+#{extends 'include.html' /} 
+#{set title:'Jira - Relação das Issues' /}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<body>
+	<form>
+	
+	#{if links.empty}
+		<div align="center">
+			<p style="color: red;"> Nenhuma Sub-Tarefa relacionada no sistema. </p>
+		</div>
+	#{/if}
+
+	#{if !links.empty}
+	<table width="100%" align="center" class="box-style">
+		<thead>
+			<tr style="background-color: #336; color: #FFF; font-weight: bold; font-size: 0.8em;">
+				<th width="1%" align="center"> 
+					Id Link
+				</th>
+				<th width="1%" align="center"> 
+					linktype 
+				</th>
+				<th width="1%" align="center"> 
+					Id story
+				</th>
+				<th width="1%" align="center"> 
+					Summary story
+				</th>
+				<th width="1%" align="center"> 
+					Id Destination 
+				</th>
+				<th width="1%" align="center"> 
+					Summary Destination
+				</th>
+			</tr>
+			
+			#{list items: links, as:'link'}
+				<tr>
+					<td align="center">
+						${link.id}
+					</td>
+				
+					<td align="center">
+						${link.statusType}
+					</td>
+					
+					<td align="center">
+						${link.jiraSource.id}
+					</td>
+					
+					<td align="center">
+						${link.jiraSource.summary}
+					</td>
+					
+					<td align="center">
+						${link.jiraDestination.id}
+					</td>
+					
+					<td align="center">
+						${link.jiraDestination.summary}
+					</td>
+				</tr>
+			#{/list}
+		</thead>
+	</table>
+	#{/if}
+	
+	
+	</br>
+	</br>
+	
+	<table width="100%" align="center" class="minimal-style" border="1">
+		<thead>
+			<tr>
+				<td> </td>
+				#{list items: lista, as:'l'}
+					<td> ${l.summary} </td>
+				#{/list}
+			</tr>
+			#{list items: map.keySet(), as:'key'}
+				<tr>
+					<td> ${key.summary} </td>
+					#{list items: lista, as:'l'}
+						<td align="center">
+							#{list items: map.get(key), as:'t'}
+								 #{if t.id == l.id }
+								 	<img alt="visualizar" src="/public/images/Yes_check.svg" width="20px" height="20px">
+								 #{/if}
+							#{/list}	
+						</td>
+					#{/list}		
+				</tr>
+			#{/list}
+		</thead>
+	</table>
+	
+	
+</form>
+
+</body>
+</html>

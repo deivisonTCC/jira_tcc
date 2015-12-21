@@ -1,0 +1,109 @@
+/**
+ * 
+ */
+package controllers;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Cidade;
+import models.Estado;
+import models.Membro;
+import models.Pessoa;
+import play.mvc.Controller;
+
+/**
+ * @author Joab
+ *
+ */
+public class Membros extends Controller{
+
+	private static Membro obj;
+	private static Pessoa pessoa;
+	
+	private static List<Cidade> cidades = new ArrayList<Cidade>();
+	private static List<Estado> estados = new ArrayList<Estado>();
+	
+	public static void listaMembros(){
+		render();
+	}
+	
+	public static void cadastroMembro(Pessoa pessoa){
+		String UsuarioLogado =  session.get("usuario");
+		flash.clear();
+		flash.success("Olá %s ", UsuarioLogado);
+		obj = new Membro();
+		//obj.getCongregacao().setNome("Amarante I");
+		render(obj);
+	}
+	
+	public static void cadastroPessoa(){
+		flash.clear();
+		try{
+			estados = Estado.findAll();
+		}catch(Exception e){
+			flash.error("Ocorreu um erro, por favor falar com o suporte.");
+		}
+		pessoa = new Pessoa();
+		pessoa.setUF(new Estado());
+		pessoa.getUF().setId((long)24);
+		render(pessoa, estados,cidades);
+	}
+	
+	public static void cadastrarPessoa(Pessoa pessoa) throws SQLException{
+		
+		validation.valid(pessoa);
+		// Errors or revise
+        if(validation.hasErrors() || params.get("revise") != null) {
+            render("@cadastroPessoa", pessoa);
+        }
+        pessoa.create();
+        cadastroMembro(pessoa);
+	}
+	/**
+	 * Método lista o resultado da busca por usuarios.
+	  * 
+	 * @author Deivison Guarines
+	 */
+	public static void buscarMembro(Integer rol, String nome, String situacao) throws SQLException{
+		//ResultSet rs = null;
+		//Connection con = null;
+		//Statement s = null;
+		
+		listaMembros();
+	}
+
+	public Membro getObj() {
+		return obj;
+	}
+
+	public void setObj(Membro obj) {
+		this.obj = obj;
+	}
+
+	public static Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public static void setPessoa(Pessoa pessoa) {
+		Membros.pessoa = pessoa;
+	}
+
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
+
+	public List<Estado> getEstados() {
+		return estados;
+	}
+
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
+	}
+
+}
